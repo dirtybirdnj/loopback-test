@@ -2,5 +2,15 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "postgres": {
+    "host": "localhost",
+    "port": 5432,
+    "url": "postgres://matgilbert:@localhost/widgetbrain",
+    "database": "widgetbrain",
+    "password": "",
+    "name": "postgres",
+    "user": "matgilbert",
+    "connector": "postgresql"
   }
 }
