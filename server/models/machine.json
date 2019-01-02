@@ -10,6 +10,10 @@
       "type": "number",
       "required": true
     },
+    "machine": {
+      "type": "number",
+      "required": true
+    },    
     "attribute": {
       "type": "string",
       "required": true

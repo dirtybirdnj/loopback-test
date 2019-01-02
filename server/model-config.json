@@ -38,5 +38,9 @@
   "Machine": {
     "dataSource": "postgres",
     "public": true
-  }
+  },
+  "container": {
+    "dataSource": "storage",
+    "public": true
+  }  
 }
