@@ -36,8 +36,42 @@ module.exports = function(Machine) {
             ];
 
             worksheet.eachRow(function(row, rowNumber) {
+                
                 if(rowNumber != 1){
-                    console.log('Row ' + rowNumber + ' = ' + JSON.stringify(row.values));
+
+                    var [ id, attribute, value ] = [ row.values[1], row.values[2], row.values[3]]
+
+                    if(attribute === 'Closing time') attribute = 'closingTime';
+
+                    console.log('Row ' + rowNumber + ' = ' + `ID: ${id} ${attribute}:${value}`);
+                    Machine.findById(id, (err, record) => {
+
+                        if(!record){
+
+                            const newMachine = {
+                                id: id,
+                                [attribute]: value
+                            }
+
+                            Machine.create(newMachine, (err, newMacInst) => {
+
+                                console.log('new machine created', newMacInst);
+                            })
+
+                        
+                        } else {
+                            
+                            record.updateAttribute( attribute, value, (err, instance) => {
+
+                                console.log('updated record!', instance);
+                                
+
+                            })
+                            
+                        }
+
+                    });
+
                 }
             });
 

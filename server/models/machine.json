@@ -13,16 +13,16 @@
     },
     "active": {
       "type": "number",
-      "required": true,
+      "required": false,
       "default": "0"
     },    
     "position": {
       "type": "number",
-      "required": true
+      "required": false
     },
     "closingTime": {
       "type": "number",
-      "required": true,
+      "required": false,
       "postgresql" : {
         "dataType": "decimal"
       }
