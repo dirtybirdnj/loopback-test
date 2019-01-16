@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "16346f6d-6323-4645-912e-f0659db6e941",
+		"name": "WidgetBrain Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Ingest Data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {}
+				},
+				"url": {
+					"raw": "localhost:3000/api/Machines/ingest",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"Machines",
+						"ingest"
+					]
+				},
+				"description": "Endpoint that ingests data from xlxs file"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {}
+				},
+				"url": {
+					"raw": "localhost:3000/api/Machines/ingest",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"Machines",
+						"ingest"
+					]
+				},
+				"description": "Endpoint that ingests data from xlxs file"
+			},
+			"response": []
+		},
+		{
+			"name": "Export Data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {}
+				},
+				"url": {
+					"raw": "localhost:3000/api/Machines/ingest",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"Machines",
+						"ingest"
+					]
+				},
+				"description": "Endpoint that ingests data from xlxs file"
+			},
+			"response": []
+		},
+		{
+			"name": "List Machines",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Machine Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}
