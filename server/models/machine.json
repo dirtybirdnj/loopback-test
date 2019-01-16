@@ -5,22 +5,28 @@
   "options": {
     "validateUpsert": true
   },
+  "forceId": false,
   "properties": {
     "id": {
       "type": "number",
       "required": true
     },
-    "machine": {
+    "active": {
       "type": "number",
-      "required": true
+      "required": true,
+      "default": "0"
     },    
-    "attribute": {
-      "type": "string",
+    "position": {
+      "type": "number",
       "required": true
     },
-    "reading": {
+    "closingTime": {
       "type": "number",
-      "required": true
+      "required": true,
+      "postgresql" : {
+        "dataType": "decimal"
+      }
+
     }
   },
   "validations": [],

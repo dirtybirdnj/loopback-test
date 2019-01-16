@@ -1,6 +1,7 @@
 var server = require('./server');
 var ds = server.dataSources.postgres;
-var lbTables = ['User', 'AccessToken', 'ACL', 'RoleMapping', 'Role', 'Machine'];
+//var lbTables = ['User', 'AccessToken', 'ACL', 'RoleMapping', 'Role', 'Machine'];
+var lbTables = ['Machine']
 ds.automigrate(lbTables, function(er) {
   if (er) throw er;
   console.log('Loopback tables [' + lbTables + '] created in ', ds.adapter.name);

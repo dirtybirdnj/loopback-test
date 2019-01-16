@@ -11,6 +11,20 @@ module.exports = function(Machine) {
         //1. Read entire CSV file
         //2. Insert one record per row
 
+        let testRec = {
+            id: 34,
+            active: 1,
+            position: 52,
+            closingTime: 23.31
+        }
+
+        Machine.create(testRec, (err, record) => {
+
+            console.log('error',err);
+            console.log('record', record);
+
+        })
+
     }
 
     Machine.export = function(payload, callback){
@@ -33,6 +47,7 @@ module.exports = function(Machine) {
             verb: 'post',
             status: 200,
         },
+        description: "Accepts an .xlxs file, creates or updates machine data",
         returns: { arg: 'response', type: 'string' }
     
 
@@ -41,7 +56,8 @@ module.exports = function(Machine) {
     Machine.remoteMethod('export', {
 
         accepts: { arg: 'msg', type: 'string' }, 
-        returns: { arg: 'response', type: 'string' }
+        returns: { arg: 'response', type: 'string' },
+        description: "Outputs an .xlxs file of all current machine data",
     
 
     });    
