@@ -20,7 +20,7 @@ Endpoints:
 A Postman f ile is provided for easy testing
 
 Note: I had a real pain of a time figuring out how to add files to the form data in Postman. The backup of My Postman files does not retain the link to files, so you will have to do this manually.
-[[https://github.com/dirtybirdnj/loopback-test/blob/master/img/postman_file_attach.png|alt=Attaching_Files]]
+[[https://github.com/dirtybirdnj/loopback-test/blob/master/postman_file_attach.png|alt=Attaching_Files]]
 
 
 NPM Scripts:
