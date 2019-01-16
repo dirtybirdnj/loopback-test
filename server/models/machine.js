@@ -2,35 +2,50 @@
 
 var Excel = require("exceljs");
 var unstream = require('unstream');
+var fs = require('fs');
 
+//Figuring out how to convert buffer to a strem was a huge pain
+//This article was the only helpful thing I found
+//http://derpturkey.com/buffer-to-stream-in-node/
+let Duplex = require('stream').Duplex;  
+function bufferToStream(buffer) {  
+  let stream = new Duplex();
+  stream.push(buffer);
+  stream.push(null);
+  return stream;
+}
 
 module.exports = function(Machine) {
 
     Machine.ingest = function(req, res, ctx, cb){
 
-        console.log('req files', req.files);
+        const uploadFile = req.files[0];
+        const dataBuff = uploadFile.buffer;
+        const dataStream = bufferToStream(dataBuff);
+        
+        var workbook = new Excel.Workbook();
+        
+        workbook.xlsx.read( dataStream ).then((book) => {
 
+            var worksheet = book.getWorksheet(1);
+            worksheet.columns = [
+                { header: 'ID', key: 'id' },
+                { header: 'Active', key: 'active' },
+                { header: 'Position', key: 'position' },
+                { header: 'Closing Time', key: 'closingTime' }
+            ];
 
-        // //1. Read entire CSV file
-        // //2. Insert one record per row
+            worksheet.eachRow(function(row, rowNumber) {
+                if(rowNumber != 1){
+                    console.log('Row ' + rowNumber + ' = ' + JSON.stringify(row.values));
+                }
+            });
 
-        // let testRec = {
-        //     id: 34,
-        //     active: 1,
-        //     position: 52,
-        //     closingTime: 23.31
-        // }
+            //Finish up
+            res.send();
+            res.end();
 
-        // Machine.create(testRec, (err, record) => {
-
-        //     console.log('error',err);
-        //     console.log('record', record);
-
-        // });
-
-        //cb(null, 'file uploaded');        
-        res.send();
-        res.end();
+        });
 
     }
 
