@@ -3,30 +3,34 @@
 var Excel = require("exceljs");
 var unstream = require('unstream');
 
+
 module.exports = function(Machine) {
 
-    Machine.ingest = function(req, res, cb){
+    Machine.ingest = function(req, res, ctx, cb){
 
-        console.log(req.files);
+        console.log('req files', req.files);
 
-        //1. Read entire CSV file
-        //2. Insert one record per row
 
-        let testRec = {
-            id: 34,
-            active: 1,
-            position: 52,
-            closingTime: 23.31
-        }
+        // //1. Read entire CSV file
+        // //2. Insert one record per row
 
-        Machine.create(testRec, (err, record) => {
+        // let testRec = {
+        //     id: 34,
+        //     active: 1,
+        //     position: 52,
+        //     closingTime: 23.31
+        // }
 
-            console.log('error',err);
-            console.log('record', record);
+        // Machine.create(testRec, (err, record) => {
 
-        });
+        //     console.log('error',err);
+        //     console.log('record', record);
 
-        cb(null, 'file uploaded');        
+        // });
+
+        //cb(null, 'file uploaded');        
+        res.send();
+        res.end();
 
     }
 
@@ -34,8 +38,9 @@ module.exports = function(Machine) {
     Machine.remoteMethod('ingest', {
 
         accepts: [
-            {arg: 'req', type: 'object', 'http': {source: 'req'}},
-            {arg: 'res', type: 'object', 'http': {source: 'res'}},
+            {arg: 'req', type: 'object', http: { source: 'req' } },
+            {arg: 'res', type: 'object', http: {source: 'res'}},
+            {arg: 'ctx', type: 'object', http: { source: 'context' } },
           ],
         http: {
             verb: 'post',
@@ -50,17 +55,10 @@ module.exports = function(Machine) {
 
     Machine.export = function(res,cb){
 
-        
-        //2. iterate over all items and create array
-        //3. Use exceljs to respond with .xlxs file
-
         //1. Query for all rows of Machine table
         Machine.find(null, (err, machines) => {
 
-
-
             var workbook = new Excel.Workbook();
-            
             var worksheet = workbook.addWorksheet('Machine Data');
             
             worksheet.columns = [
@@ -83,11 +81,10 @@ module.exports = function(Machine) {
             res.set('Content-Disposition','attachment;filename=machines.xlsx');
             res.set('Content-Transfer-Encoding','binary');
             
+            //3. Use exceljs to respond with .xlsx file
             workbook.xlsx.write(unstream({}, function(data) {
-
                 res.send(data);
                 res.end();
-
             }));
             
         });

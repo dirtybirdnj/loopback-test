@@ -2,17 +2,20 @@
 
 var loopback = require('loopback');
 var boot = require('loopback-boot');
-var fileUpload = require('express-fileupload');
+//var fileUpload = require('express-fileupload');
+var bodyParser = require('body-parser');
+var multer = require('multer');
 
 
 var app = module.exports = loopback();
 
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(multer().any()); // for parsing multipart/form-data
 
 app.start = function() {
-  // start the web server
+
   return app.listen(function() {
-    
-    app.use(fileUpload());
     
     app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
